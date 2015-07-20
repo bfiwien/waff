@@ -28,8 +28,6 @@ class waffClient
      *
      * @param string $username
      * @param string $password
-     *
-     * @return $this
      */
     public function __construct($username = '', $password = '')
     {
@@ -59,7 +57,7 @@ class waffClient
      * Pass request onto the WAFF instance.
      *
      * @param string $methode
-     * @param array  $arguments
+     * @param array|null  $arguments
      * @param bool   $withOfferNumber
      *
      * @return string
@@ -104,7 +102,7 @@ class waffClient
      *
      * @return $this
      */
-    public function setOffer($attributes = array(), $specification = null)
+    public function setOffer($attributes = array())
     {
         $this->OfferNumber = $attributes['OfferNumber'];
 
@@ -129,8 +127,6 @@ class waffClient
 
     /**
      * Clear all dates for an offer.
-     *
-     * @param array $attributes
      *
      * @return $this
      */
@@ -179,8 +175,6 @@ class waffClient
 
     /**
      * Clear all themes for an offer.
-     *
-     * @param array $attributes
      *
      * @return $this
      */
