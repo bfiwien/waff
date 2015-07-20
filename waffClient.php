@@ -34,8 +34,6 @@ class waffClient
         $this->client = new SoapClient('http://service.weiterbildung.at/Version1_2.asmx?WSDL');
 
         $this->token = $this->call('Login', array('username' => $username, 'password' => $password));
-
-        return $this;
     }
 
     /**
@@ -221,11 +219,13 @@ class waffClient
         try {
             return $this->call('getLocationByXID', array('externalID' => (is_array($term)) ? $term['externalID'] : $term));
         } catch (Exception $e) {
+          //Can't find location by id
         }
 
         try {
             return $this->call('getLocation', array('LocationName' => (is_array($term)) ? $term['LocationName'] : $term));
         } catch (Exception $e) {
+          //Can't find location by name
         }
 
         return 0;
@@ -245,9 +245,12 @@ class waffClient
                 return $id;
             }
         } catch (Exception $e) {
+          //Can't find an existing location.
+
+          return $this->call('addLocation', $attributes);
         }
 
-        return $this->call('addLocation', $attributes);
+
     }
 
     /**
